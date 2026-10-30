@@ -1,0 +1,21 @@
+.attendance-grid {
+  font-size: 14px;
+}
+
+.header-row {
+  background: #f4f5f8;
+  padding: 10px 0;
+  border-bottom: 2px solid #ddd;
+  color: black;
+}
+
+.data-row {
+  border-bottom: 1px solid #eee;
+  padding: 8px 0;
+}
+
+ion-col {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}

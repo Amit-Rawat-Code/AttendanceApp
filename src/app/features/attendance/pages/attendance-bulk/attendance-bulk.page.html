@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Bulk Attendance</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form [formGroup]="attendanceForm">
+
+  <div formArrayName="employees">
+
+    <ion-grid class="attendance-grid">
+
+      <!-- Header -->
+      <ion-row class="header-row">
+        <ion-col size="3"><strong>Name</strong></ion-col>
+        <ion-col size="2"><strong>Status</strong></ion-col>
+        <ion-col size="2"><strong>Check In</strong></ion-col>
+        <ion-col size="2"><strong>Check Out</strong></ion-col>
+        <ion-col size="1"><strong>Hours</strong></ion-col>
+        <ion-col size="2"><strong>Action</strong></ion-col>
+      </ion-row>
+
+      <!-- Rows -->
+      <ion-row
+        *ngFor="let emp of employees.controls; let i = index"
+        [formGroupName]="i"
+        class="data-row">
+
+        <!-- Name -->
+        <ion-col size="3">
+          {{ emp.value.employeeName }}
+        </ion-col>
+
+        <!-- STATUS -->
+        <ion-col size="2">
+          <ng-container *ngIf="!emp.value.isEdit; else editStatus">
+            {{ emp.value.status }}
+          </ng-container>
+
+          <ng-template #editStatus>
+            <ion-select formControlName="status">
+              <ion-select-option value="Present">Present</ion-select-option>
+              <ion-select-option value="Absent">Absent</ion-select-option>
+              <ion-select-option value="Leave">Leave</ion-select-option>
+            </ion-select>
+          </ng-template>
+        </ion-col>
+
+        <!-- CHECK IN -->
+        <ion-col size="2">
+          <ng-container *ngIf="!emp.value.isEdit; else editCheckIn">
+            {{ emp.value.checkIn }}
+          </ng-container>
+
+          <ng-template #editCheckIn>
+            <ion-input type="time" formControlName="checkIn"></ion-input>
+          </ng-template>
+        </ion-col>
+
+        <!-- CHECK OUT -->
+        <ion-col size="2">
+          <ng-container *ngIf="!emp.value.isEdit; else editCheckOut">
+            {{ emp.value.checkOut }}
+          </ng-container>
+
+          <ng-template #editCheckOut>
+            <ion-input type="time" formControlName="checkOut"></ion-input>
+          </ng-template>
+        </ion-col>
+
+        <!-- HOURS -->
+        <ion-col size="1">
+          {{ emp.value.hours }}
+        </ion-col>
+
+        <!-- ACTION -->
+        <ion-col size="2">
+          <ion-button
+            size="small"
+            fill="outline"
+            (click)="toggleEdit(i)">
+            {{ emp.value.isEdit ? 'Save' : 'Edit' }}
+          </ion-button>
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+
+  </div>
+
+</form>
+
+</ion-content>

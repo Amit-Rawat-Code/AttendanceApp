@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Attendance</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/attendance/add">Add</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of records">
+      <ion-label>
+        <h2>{{ item.employeeName }}</h2>
+        <p>{{ item.date }}</p>
+      </ion-label>
+
+      <ion-button fill="clear" [routerLink]="['/attendance/edit', item.id]">
+        Edit
+      </ion-button>
+
+      <ion-button fill="clear" color="danger" (click)="delete(item.id)">
+        Delete
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Attendance</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form [formGroup]="editForm">
+
+    <ion-item>
+      <ion-label position="stacked">Employee Name</ion-label>
+      <ion-input formControlName="name" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Status</ion-label>
+      <ion-select formControlName="status">
+        <ion-select-option value="Present">Present</ion-select-option>
+        <ion-select-option value="Absent">Absent</ion-select-option>
+        <ion-select-option value="Leave">Leave</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Check In</ion-label>
+      <ion-input type="time" formControlName="checkIn"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Check Out</ion-label>
+      <ion-input type="time" formControlName="checkOut"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" (click)="save()">
+      Update Attendance
+    </ion-button>
+
+  </form>
+
+</ion-content>

@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Attendance Entry</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form [formGroup]="attendanceForm" (ngSubmit)="submitForm()">
+
+    <ion-item>
+      <ion-label position="stacked">Employee Name</ion-label>
+      <ion-input type="text" formControlName="employeeName"></ion-input>
+    </ion-item>
+
+    <!-- Date -->
+    <ion-item id="date-trigger" button>
+      <ion-label>Date</ion-label>
+      <ion-text>
+        {{ attendanceForm.value.date || 'Select Date' }}
+      </ion-text>
+    </ion-item>
+
+    <ion-popover trigger="date-trigger" triggerAction="click">
+      <ng-template>
+        <ion-datetime
+          presentation="date"
+          formControlName="date">
+        </ion-datetime>
+      </ng-template>
+    </ion-popover>
+
+    <!-- Check In -->
+    <ion-item id="checkin-trigger" button>
+      <ion-label>Check In</ion-label>
+      <ion-text>
+        {{ attendanceForm.value.checkIn || 'Select Time' }}
+      </ion-text>
+    </ion-item>
+
+    <ion-popover trigger="checkin-trigger" triggerAction="click">
+      <ng-template>
+        <ion-datetime
+          presentation="time"
+          formControlName="checkIn">
+        </ion-datetime>
+      </ng-template>
+    </ion-popover>
+
+    <!-- Check Out -->
+    <ion-item id="checkout-trigger" button>
+      <ion-label>Check Out</ion-label>
+      <ion-text>
+        {{ attendanceForm.value.checkOut || 'Select Time' }}
+      </ion-text>
+    </ion-item>
+
+    <ion-popover trigger="checkout-trigger" triggerAction="click">
+      <ng-template>
+        <ion-datetime
+          presentation="time"
+          formControlName="checkOut">
+        </ion-datetime>
+      </ng-template>
+    </ion-popover>
+
+    <ion-item>
+      <ion-label position="stacked">Status</ion-label>
+      <ion-select formControlName="status" interface="popover">
+        <ion-select-option value="Present">Present</ion-select-option>
+        <ion-select-option value="Absent">Absent</ion-select-option>
+        <ion-select-option value="Half Day">Half Day</ion-select-option>
+        <ion-select-option value="Leave">Leave</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Remarks</ion-label>
+      <ion-textarea formControlName="remarks"></ion-textarea>
+    </ion-item>
+
+    <ion-button 
+      expand="block" 
+      type="submit" 
+      [disabled]="attendanceForm.invalid"
+      class="ion-margin-top">
+      Save Attendance
+    </ion-button>
+
+  </form>
+
+</ion-content>
